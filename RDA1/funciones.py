@@ -172,3 +172,80 @@ while True:
         break
     else:
         print("Opcion invalida, por favor seleccione una opcion valida")
+
+#clase
+class Perro:
+    def __init__(self, nombre, edad, raza):
+        self.nombre = nombre
+        self.edad = edad
+        self.raza = raza
+    
+    def ladrar(self):
+        print("Guau!") 
+#objeto
+perro1 = Perro("Firulais", 3, "Labrador")
+print(perro1.nombre)
+perro1.ladrar()
+
+
+# print("Nombre:", perro1.nombre)
+# print("Edad:", perro1.edad)
+# print("Raza:", perro1.raza)
+
+#Encapsulamiento
+class CuentaBancaria:
+    def __init__(self, saldo):
+        self.__saldo = saldo
+    
+    def ver_saldo(self):
+        return self.__saldo
+    
+    def depositar(self, cantidad):
+        if cantidad > 0:
+            self.__saldo += cantidad
+            print("Deposito exitoso")
+
+cuenta = CuentaBancaria(1000)
+print("Saldo inicial:", cuenta.ver_saldo())
+cuenta.depositar(500)
+print("Saldo actual:", cuenta.ver_saldo())
+
+#HERENCIA
+class Animal:
+    def hablar(self):
+        print("Este animal hace un sonido")
+    def sonido(self):
+        print("Este animal hace un sonido")
+
+class Perro(Animal):
+    def sonido(self):
+        print("El perro dice 'Guau!'")
+
+class persona(Animal):
+    def hablar(self):
+        print("La persona dice 'Hola!'")
+        
+perro = Perro()
+perro.sonido()
+
+humano = persona()
+humano.hablar()
+
+class Gato:
+    def hacer_sonido(self):
+        print("El gato dice 'Miau!'")
+
+class Perro:
+    def hacer_sonido(self):
+        print("El perro dice 'Guau!'")
+#Uso del polimorfismo
+#El polimorfismo permite que diferentes clases tengan el mismo nombre de metodo pero con diferentes implementaciones
+def hacer_sonido_animal(animal):
+    animal.hacer_sonido()
+
+gato = Gato()
+perro = Perro()
+
+hacer_sonido_animal(gato)
+hacer_sonido_animal(perro)
+
