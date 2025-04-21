@@ -1,4 +1,4 @@
-# class Persona_imput:
+# class Persona_imput: clase es = Es una plantilla para crear objetos
 #     def __init__(self): #init es un metodo inicializacion de atributos
 #         self.nombre = input("Ingrese su nombre: ") #Atributos de la clase
 #         self.edad = int(input("Ingrese su edad: "))
