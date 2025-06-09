@@ -18,4 +18,28 @@ if pila:
     print(f"Último plato en la pila: {pila[-1]}")
 else:
     print("La pila está vacía")
+
+#is_empty verifica si la pila está vacía
+if not pila:
+    print("La pila está vacía")
+else:
+    print("La pila no está vacía, contiene elementos")
+
+pilas = []
+
+#Push
+pilas.append("Tarea 1")
+pilas.append("Tarea 2")
+#peek
+print(f"Última tarea en la pila: {pilas[-1]}")
+#Pop
+tarea_eliminada = pilas.pop()
+print(f"Tarea eliminada: {tarea_eliminada}")
+#Ver lista de tareas en la pila
+print(f"Pila de tareas actual: {pilas}")
+#is_empty
+if not pilas:
+    print("La pila está vacía")
+else:
+    print("La pila no está vacía, contiene tareas")
     
