@@ -1,0 +1,1125 @@
+\documentclass[12pt,a4paper]{article}
+
+% Codificación y lenguaje
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+% Matemáticas
+\usepackage{amsmath, amsfonts, amssymb}
+
+% Estética de página
+\usepackage{geometry}
+\geometry{margin=1.5cm, top=2cm, bottom=2cm}
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.58337pt}
+
+% Gráficos y diagramas
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{forest}
+\usetikzlibrary{mindmap,trees}
+
+% Estilo y tablas
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+
+% Cajas y elementos visuales
+\usepackage[most]{tcolorbox}
+
+% Enlaces, QR y tipografía
+\usepackage{hyperref}
+\usepackage{qrcode}
+\usepackage{fontawesome5}
+\faStyle{solid} % Habilita íconos sólidos como \faPencilAlt
+
+% Código fuente
+\usepackage{listings}
+\lstset{
+	backgroundcolor=\color{lightgray},
+	basicstyle=\ttfamily\footnotesize,
+	keywordstyle=\color{primaryblue}\bfseries,
+	commentstyle=\color{darkgray}\itshape,
+	stringstyle=\color{secondarygreen},
+	numberstyle=\tiny\color{darkgray},
+	numbers=left,
+	frame=single,
+	frameround=tttt,
+	rulecolor=\color{primaryblue},
+	breaklines=true,
+	showstringspaces=false,
+	tabsize=2,
+	captionpos=b
+}
+
+% Colores personalizados
+\definecolor{primaryblue}{RGB}{41, 128, 185}
+\definecolor{secondarygreen}{RGB}{39, 174, 96}
+\definecolor{warningorange}{RGB}{230, 126, 34}
+\definecolor{dangerred}{RGB}{231, 76, 60}
+\definecolor{lightgray}{RGB}{248, 249, 250}
+\definecolor{darkgray}{RGB}{52, 73, 94}
+\definecolor{purple}{RGB}{155, 89, 182}
+\definecolor{turquoise}{RGB}{26, 188, 156}
+
+% Encabezado y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textcolor{primaryblue}{Taller de Grafos y Árboles - Presentación Interactiva}}}
+\fancyhead[R]{\textcolor{primaryblue}{\thepage}}
+\fancyfoot[C]{\small \textcolor{gray}{Equipo: Juan Sandoval • Javier • Alejandro • Gabriel}}
+
+% Cajas personalizadas
+\newtcolorbox{presentationbox}[2]{
+	colback=#1!10,
+	colframe=#1,
+	title=\textbf{\Large #2},
+	fonttitle=\bfseries\Large,
+	rounded corners,
+	boxsep=10pt,
+	left=15pt,
+	right=15pt,
+	top=15pt,
+	bottom=15pt,
+	enhanced,
+	shadow={2mm}{-2mm}{0mm}{black!20}
+}
+
+\newtcolorbox{activitybox}[1]{
+	colback=turquoise!5,
+	colframe=turquoise,
+	title=\textbf{\faUsers\ #1},
+	fonttitle=\bfseries,
+	rounded corners,
+	enhanced,
+	attach boxed title to top left={yshift=-3mm,xshift=4mm},
+	boxed title style={rounded corners}
+}
+
+\newtcolorbox{quizbox}[1]{
+	colback=purple!5,
+	colframe=purple,
+	title=\textbf{\faQuestion\ #1},
+	fonttitle=\bfseries,
+	rounded corners,
+	enhanced
+}
+
+\newtcolorbox{instructorbox}[2]{
+	colback=#1!5,
+	colframe=#1,
+	title=\textbf{\faMicrophone\ #2},
+	fonttitle=\bfseries,
+	rounded corners,
+	enhanced
+}
+
+% Título de la presentación
+\title{
+	\vspace{-1.5cm}
+	{\Huge\textbf{\textcolor{primaryblue}{Taller Interactivo}}}\\[0.3cm]
+	{\LARGE\textbf{\textcolor{secondarygreen}{Grafos y Árboles}}}\\[0.5cm]
+	{\Large Estructuras de Datos que Cambiarán tu Perspectiva}\\[0.3cm]
+	{\large \textcolor{darkgray}{Duración: 2 horas • Formato: Interactivo}}
+}
+
+\author{
+	\begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue, rounded corners]
+		\centering
+		\textbf{\Large Equipo de Instructores}\\[0.5cm]
+		\begin{tabular}{cc}
+			\textbf{\textcolor{primaryblue}{Juan Sandoval}} & \textbf{\textcolor{secondarygreen}{Javier}} \\
+			\faLightbulb\ Facilitador Principal & \faCode\ Autoridad Técnica \\[0.5cm]
+			\textbf{\textcolor{warningorange}{Alejandro}} & \textbf{\textcolor{turquoise}{Gabriel}} \\
+			\faTools\ Coordinador de Prácticas & \faGlobe\ Especialista en Aplicaciones
+		\end{tabular}
+	\end{tcolorbox}
+}
+
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	\thispagestyle{empty}
+	
+	\vfill
+	\begin{center}
+		\begin{tcolorbox}[colback=secondarygreen!10, colframe=secondarygreen, rounded corners, width=0.8\textwidth]
+			\centering
+			\Large\textit{"¿Cómo crees que Google Maps encuentra la ruta más corta\\
+				entre miles de posibilidades en menos de un segundo?"}\\[0.3cm]
+			\normalsize\textbf{Al final de este taller, tendrás la respuesta}
+		\end{tcolorbox}
+	\end{center}
+	\vfill
+	
+	\newpage
+	
+	% AGENDA VISUAL
+	\section*{\faClock\ Agenda Interactiva - 2 Horas}
+	
+	\begin{center}
+		\begin{tikzpicture}[node distance=1cm]
+			% Línea de tiempo
+			\draw[thick, primaryblue] (0,0) -- (12,0);
+			
+			% Puntos de tiempo
+			\foreach \x/\time in {0/0:00, 3/0:45, 6/1:15, 9/1:35, 12/2:00} {
+				\fill[primaryblue] (\x,0) circle (3pt);
+				\node[below] at (\x,-0.3) {\small\textbf{\time}};
+			}
+			
+			% Bloques de actividades
+			\node[rectangle, draw, fill=primaryblue!20, minimum width=2.5cm, minimum height=1cm] at (1.5,1) {
+				\begin{minipage}{2.3cm}
+					\centering\small\textbf{Apertura}\\
+					Gancho\\
+					5 min
+				\end{minipage}
+			};
+			
+			\node[rectangle, draw, fill=secondarygreen!20, minimum width=2.5cm, minimum height=1cm] at (4.5,1) {
+				\begin{minipage}{2.3cm}
+					\centering\small\textbf{Teoría}\\
+					Interactiva\\
+					40 min
+				\end{minipage}
+			};
+			
+			\node[rectangle, draw, fill=warningorange!20, minimum width=2.5cm, minimum height=1cm] at (7.5,1) {
+				\begin{minipage}{2.3cm}
+					\centering\small\textbf{Práctica}\\
+					Ejercicios\\
+					50 min
+				\end{minipage}
+			};
+			
+			\node[rectangle, draw, fill=turquoise!20, minimum width=2.5cm, minimum height=1cm] at (10.5,1) {
+				\begin{minipage}{2.3cm}
+					\centering\small\textbf{Aplicación}\\
+					Grupal\\
+					20 min
+				\end{minipage}
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\vspace{1cm}
+	
+	\begin{presentationbox}{primaryblue}{Objetivos de Aprendizaje}
+		Al finalizar este taller interactivo, serás capaz de:
+		\begin{itemize}[leftmargin=2cm, itemsep=0.5cm]
+			\item[\textcolor{secondarygreen}{\faCheck}] \textbf{Identificar} cuándo usar grafos vs árboles en problemas reales
+			\item[\textcolor{secondarygreen}{\faCheck}] \textbf{Implementar} algoritmos de recorrido (DFS, BFS) paso a paso
+			\item[\textcolor{secondarygreen}{\faCheck}] \textbf{Aplicar} estos conceptos a tecnologías que usas diariamente
+			\item[\textcolor{secondarygreen}{\faCheck}] \textbf{Resolver} problemas prácticos usando pensamiento algorítmico
+		\end{itemize}
+	\end{presentationbox}
+	
+	\newpage
+	
+	% APERTURA Y GANCHO
+	\section*{\faRocket\ Apertura: La Magia Invisible de la Tecnología}
+	
+	\instructorbox{primaryblue}{Juan Sandoval - 5 minutos}
+	
+	\begin{center}
+		\begin{tcolorbox}[colback=warningorange!10, colframe=warningorange, rounded corners, width=0.9\textwidth]
+			\centering
+			\LARGE\textbf{PREGUNTA GANCHO}\\[0.5cm]
+			\Large "¿Cómo creen que Google Maps encuentra\\
+			la ruta más corta entre miles de posibilidades\\
+			en menos de un segundo?"
+		\end{tcolorbox}
+	\end{center}
+	
+	\vspace{0.5cm}
+	
+	\begin{multicols}{2}
+		\subsection*{\faLightbulb\ Tecnologías que Usan Estas Estructuras}
+		
+		\begin{itemize}[itemsep=0.3cm]
+			\item \textbf{\faRoute\ Google Maps:} Rutas óptimas
+			\item \textbf{\faInstagram\ Instagram:} Sugerir amigos  
+			\item \textbf{\faFilm\ Netflix:} Recomendaciones
+			\item \textbf{\faGamepad\ Videojuegos:} Pathfinding de NPCs
+			\item \textbf{\faSearch\ Google:} PageRank
+			\item \textbf{\faBrain\ Spotify:} Playlists personalizadas
+		\end{itemize}
+		
+		\columnbreak
+		
+		\subsection*{\faUsers\ Expectativas de Participación}
+		
+		\begin{itemize}[itemsep=0.3cm]
+			\item \textcolor{secondarygreen}{\faHandPaper} Participación activa
+			\item \textcolor{primaryblue}{\faComments} Preguntas bienvenidas
+			\item \textcolor{warningorange}{\faUsers} Trabajo en equipo
+			\item \textcolor{turquoise}{\faPuzzlePiece} Resolución de problemas
+		\end{itemize}
+		
+	\end{multicols}
+	
+	\newpage
+	
+	% BLOQUE 1: TEORÍA INTERACTIVA
+	\section*{\faBook\ Bloque 1: Fundamentos Visuales Interactivos (40 min)}
+	
+	\instructorbox{primaryblue}{Juan Sandoval - Segmentos 1 y 2 (25 min)}
+	\instructorbox{secondarygreen}{Javier - Segmento 3 (15 min)}
+	
+	\subsection*{Segmento 1: De la Red Social al Concepto \faUsers}
+	
+	\begin{center}
+		\textbf{\Large Construcción en Vivo: Red Social Simple}
+	\end{center}
+	
+	\begin{center}
+		\begin{tikzpicture}[node distance=3cm, scale=0.8]
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1.2cm] (ana) {\textbf{Ana}};
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1.2cm, right of=ana] (carlos) {\textbf{Carlos}};
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1.2cm, below of=ana] (maria) {\textbf{María}};
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1.2cm, below of=carlos] (david) {\textbf{David}};
+			
+			\draw[thick, primaryblue] (ana) -- (carlos);
+			\draw[thick, primaryblue] (ana) -- (maria);
+			\draw[thick, primaryblue] (carlos) -- (david);
+			\draw[thick, primaryblue] (maria) -- (david);
+			
+			% Etiquetas
+			\node[above] at (ana) {\small\textcolor{secondarygreen}{Nodo}};
+			\node[above, rotate=0] at ($(ana)!0.5!(carlos)$) {\small\textcolor{warningorange}{Arista}};
+		\end{tikzpicture}
+	\end{center}
+	
+	\quizbox{Mini-Quiz 1 - Participación con Tarjetas de Colores}
+	\textbf{¿Cuántas rutas diferentes hay de Ana a David?}\\
+	\textcolor{secondarygreen}{\faCircle} Verde: 1 ruta \quad
+	\textcolor{primaryblue}{\faCircle} Azul: 2 rutas \quad
+	\textcolor{dangerred}{\faCircle} Rojo: 3 rutas
+	
+	\vspace{0.5cm}
+	
+	\subsection*{Evolución: De Red Social a Estructura Familiar}
+	
+	\begin{center}
+		\textbf{\Large Del Grafo al Árbol: Jerarquía Clara}
+	\end{center}
+	
+	\begin{center}
+		\begin{tikzpicture}[
+			level distance=1.8cm,
+			level 1/.style={sibling distance=4cm},
+			level 2/.style={sibling distance=2cm},
+			every node/.style={circle, draw, thick, minimum size=1cm}
+			]
+			\node[fill=warningorange!20] {\textbf{Abuela}}
+			child {node[fill=secondarygreen!20] {\textbf{Papá}}
+				child {node[fill=primaryblue!20] {\textbf{Miguel}}}
+				child {node[fill=primaryblue!20] {\textbf{Sofía}}}
+			}
+			child {node[fill=secondarygreen!20] {\textbf{Tía}}
+				child {node[fill=primaryblue!20] {\textbf{Pedro}}}
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\begin{presentationbox}{secondarygreen}{Diferencias Clave: Grafo vs Árbol}
+		\begin{multicols}{2}
+			\textbf{\textcolor{secondarygreen}{Árbol:}}
+			\begin{itemize}
+				\item[\textcolor{secondarygreen}{\faCheck}] Jerarquía clara
+				\item[\textcolor{secondarygreen}{\faCheck}] Sin ciclos
+				\item[\textcolor{secondarygreen}{\faCheck}] Un solo "jefe"
+				\item[\textcolor{secondarygreen}{\faCheck}] Estructura dirigida
+			\end{itemize}
+			
+			\columnbreak
+			
+			\textbf{\textcolor{primaryblue}{Grafo:}}
+			\begin{itemize}
+				\item[\textcolor{primaryblue}{\faCheck}] Puede tener ciclos
+				\item[\textcolor{primaryblue}{\faCheck}] Conexiones flexibles
+				\item[\textcolor{primaryblue}{\faCheck}] No necesariamente jerárquico
+				\item[\textcolor{primaryblue}{\faCheck}] Múltiples relaciones
+			\end{itemize}
+		\end{multicols}
+	\end{presentationbox}
+	
+	\newpage
+	
+	\subsection*{Segmento 2: Tipos de Grafos con Ejemplos Cotidianos}
+	
+	\begin{center}
+		\begin{tabularx}{\textwidth}{|X|X|X|}
+			\hline
+			\cellcolor{primaryblue!20}\textbf{\faFacebook\ No Dirigido} & 
+			\cellcolor{secondarygreen!20}\textbf{\faTwitter\ Dirigido} & 
+			\cellcolor{warningorange!20}\textbf{\faRoute\ Ponderado} \\
+			\hline
+			Amistad en Facebook & Seguir en Twitter & Rutas con distancias \\
+			\hline
+			\tikz[baseline=(a.base), scale=0.6]{
+				\node[circle, draw, fill=white] (a) at (0,0) {A};
+				\node[circle, draw, fill=white] (b) at (2,0) {B};
+				\draw[thick] (a) -- (b);
+			}
+			
+			&
+		\tikz[baseline=(a.base), scale=0.6]{
+			\node[circle, draw, fill=white] (a) at (0,0) {A};
+			\node[circle, draw, fill=white] (b) at (2,0) {B};
+			\draw[thick] (a) -- (b);
+		}
+		
+			&
+		\tikz[baseline=(a.base), scale=0.6]{
+			\node[circle, draw, fill=white] (a) at (0,0) {A};
+			\node[circle, draw, fill=white] (b) at (2,0) {B};
+			\draw[thick] (a) -- (b);
+		}
+		
+			\\
+			\hline
+		\end{tabularx}
+	\end{center}
+	
+	\quizbox{Mini-Quiz 2 - Identificación Rápida}
+	\textbf{¿Qué tipo de grafo representa mejor una red de carreteras de doble vía?}\\
+	Respuesta con tarjetas de colores (2 minutos de discusión)
+	
+	\vspace{0.5cm}
+	
+	\subsection*{Segmento 3: Algoritmos de Recorrido - Estrategias de Exploración}
+	
+	\instructorbox{secondarygreen}{Javier - Demostración Técnica Visual}
+	
+	\begin{center}
+		\begin{tabularx}{\textwidth}{|X|X|}
+			\hline
+			\cellcolor{primaryblue!20}\textbf{\faMountain\ DFS - Explorador de Montañas} & 
+			\cellcolor{turquoise!20}\textbf{\faWater\ BFS - Propagación de Rumor} \\
+			\hline
+			\textit{"Profundo primero"} & \textit{"Nivel por nivel"} \\
+			Va hasta el final antes de cambiar & Explora todos los vecinos primero \\
+			Usa una \textbf{Pila (Stack)} & Usa una \textbf{Cola (Queue)} \\
+			\hline
+		\end{tabularx}
+	\end{center}
+	
+	\begin{center}
+		\textbf{\Large Demostración en Vivo: Mismo Árbol, Diferentes Recorridos}
+	\end{center}
+	
+	\begin{center}
+		\begin{tikzpicture}[
+			level distance=2cm,
+			level 1/.style={sibling distance=4cm},
+			level 2/.style={sibling distance=2cm},
+			every node/.style={circle, draw, thick, minimum size=1.2cm}
+			]
+			\node[fill=primaryblue!20, label=above:{\textcolor{primaryblue}{\textbf{1}}}] {A}
+			child {node[fill=secondarygreen!20, label=left:{\textcolor{secondarygreen}{\textbf{2}}}] {B}
+				child {node[fill=warningorange!20, label=left:{\textcolor{warningorange}{\textbf{3}}}] {D}}
+				child {node[fill=warningorange!20, label=right:{\textcolor{warningorange}{\textbf{4}}}] {E}}
+			}
+			child {node[fill=secondarygreen!20, label=right:{\textcolor{secondarygreen}{\textbf{5}}}] {C}
+				child {node[fill=warningorange!20, label=right:{\textcolor{warningorange}{\textbf{6}}}] {F}}
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\begin{center}
+		\begin{tabular}{c|c}
+			\textbf{DFS} & \textbf{BFS} \\
+			A → B → D → E → C → F & A → B → C → D → E → F \\
+			\textcolor{primaryblue}{Profundidad} & \textcolor{turquoise}{Amplitud}
+		\end{tabular}
+	\end{center}
+	
+	\quizbox{Mini-Quiz 3 - Predicción Interactiva}
+	Dado el siguiente nodo en el recorrido DFS después de visitar A y B, ¿cuál será el próximo?
+	\textbf{Respuesta grupal con justificación}
+	
+	\newpage
+	
+	% DESCANSO ACTIVO
+	\section*{\faCoffee\ Descanso Activo (5 minutos)}
+	
+	\begin{activitybox}{Preparación para Ejercicios Prácticos}
+		\begin{itemize}
+			\item \textbf{Estiramiento guiado:} Activación física
+			\item \textbf{Formación de grupos:} 4-5 personas por equipo
+			\item \textbf{Distribución de materiales:} Hojas de trabajo y marcadores
+			\item \textbf{Asignación de roles:} Cada miembro tiene una función específica
+		\end{itemize}
+	\end{activitybox}
+	
+	\newpage
+	
+	% BLOQUE 2: EJERCICIOS PRÁCTICOS
+\section*{\faChalkboardTeacher\ Bloque 2: Ejercicios Prácticos Escalados (50 min)}
+	
+	\instructorbox{warningorange}{Alejandro - Coordinador Principal}
+	\instructorbox{secondarygreen}{Javier - Apoyo Técnico}
+	
+	\subsection*{Ejercicio 1: Recorrido Manual Guiado (15 min)}
+	
+	\activitybox{Participación Total con Verificación Inmediata}
+	
+	\textbf{Metodología:}
+	\begin{enumerate}
+		\item \textbf{Demostración DFS (3 min):} Instructor guía paso a paso
+		\item \textbf{Práctica BFS en parejas (5 min):} Aplicación inmediata
+		\item \textbf{Verificación grupal (4 min):} Corrección colaborativa
+		\item \textbf{Comparación de resultados (3 min):} Análisis de diferencias
+	\end{enumerate}
+	
+	\begin{center}
+		\textbf{Grafo de Práctica}
+	\end{center}
+	
+	\begin{center}
+		\begin{tikzpicture}[node distance=2.5cm, scale=1.2]
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1cm] (1) {1};
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1cm, right of=1] (2) {2};
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1cm, below right of=1] (3) {3};
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1cm, below of=3] (4) {4};
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1cm, left of=4] (5) {5};
+			\node[circle, draw=primaryblue, fill=primaryblue!20, thick, minimum size=1cm, above left of=5] (6) {6};
+			
+			\draw[thick, primaryblue] (1) -- (2);
+			\draw[thick, primaryblue] (1) -- (3);
+			\draw[thick, primaryblue] (1) -- (6);
+			\draw[thick, primaryblue] (2) -- (3);
+			\draw[thick, primaryblue] (3) -- (4);
+			\draw[thick, primaryblue] (4) -- (5);
+			\draw[thick, primaryblue] (5) -- (6);
+		\end{tikzpicture}
+	\end{center}
+	
+	\textbf{Hoja de Trabajo - Completa los Recorridos:}
+	
+	\begin{center}
+		\begin{tabular}{|p{0.4\textwidth}|p{0.4\textwidth}|}
+			\hline
+			\textbf{DFS desde nodo 1:} & \textbf{BFS desde nodo 1:} \\
+			\hline
+			1 → \_\_\_ → \_\_\_ → \_\_\_ → \_\_\_ → \_\_\_ & 1 → \_\_\_ → \_\_\_ → \_\_\_ → \_\_\_ → \_\_\_ \\
+			\hline
+			\textbf{Estrategia usada:} & \textbf{Estrategia usada:} \\
+			\rule{0pt}{2cm} & \rule{0pt}{2cm} \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\newpage
+	
+	\subsection*{Ejercicio 2: Pseudocódigo en Acción (20 min)}
+	
+	\instructorbox{secondarygreen}{Javier + Alejandro - Colaboración Técnica}
+	
+	\textbf{Del Código a la Práctica - 4 Fases:}
+	
+	\begin{center}
+		\begin{lstlisting}[language=Python, title=Algoritmo Inorden - Para Ejecutar Paso a Paso, frame=single]
+			def inorden(nodo):
+			"""
+			Recorrido inorden: Izquierda -> Raiz -> Derecha
+			"""
+			if nodo is not None:
+			inorden(nodo.izquierdo)    # Paso 1: Hijo izquierdo
+			print(nodo.valor)          # Paso 2: Procesar nodo actual  
+			inorden(nodo.derecho)      # Paso 3: Hijo derecho
+		\end{lstlisting}
+	\end{center}
+	
+	\textbf{Fase 1: Presentación del Algoritmo (5 min)}
+	- Explicación línea por línea del pseudocódigo
+	- Identificación de caso base y caso recursivo
+	
+	\textbf{Fase 2: Ejecución Colaborativa (8 min)}
+	
+	\begin{center}
+		\textbf{Árbol de Ejemplo para Ejecución Manual}
+	\end{center}
+	
+	\begin{center}
+		\begin{tikzpicture}[
+			level distance=1.8cm,
+			level 1/.style={sibling distance=3cm},
+			level 2/.style={sibling distance=1.5cm},
+			every node/.style={circle, draw, thick, minimum size=1.2cm}
+			]
+			\node[fill=primaryblue!20] {4}
+			child {node[fill=secondarygreen!20] {2}
+				child {node[fill=warningorange!20] {1}}
+				child {node[fill=warningorange!20] {3}}
+			}
+			child {node[fill=secondarygreen!20] {6}
+				child {node[fill=warningorange!20] {5}}
+				child {node[fill=warningorange!20] {7}}
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\textbf{Tabla de Ejecución Paso a Paso:}
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Paso} & \textbf{Nodo Actual} & \textbf{Acción} & \textbf{Salida} \\
+			\hline
+			1 & 4 & Ir a izquierdo (2) & - \\
+			\hline
+			2 & 2 & Ir a izquierdo (1) & - \\
+			\hline
+			3 & 1 & Procesar (sin hijos) & \textbf{1} \\
+			\hline
+			4 & 2 & Procesar & \textbf{2} \\
+			\hline
+			5 & 2 & Ir a derecho (3) & - \\
+			\hline
+			6 & 3 & Procesar (sin hijos) & \textbf{3} \\
+			\hline
+			7 & 4 & Procesar & \textbf{4} \\
+			\hline
+			8 & 4 & Ir a derecho (6) & - \\
+			\hline
+			9 & 6 & Ir a izquierdo (5) & - \\
+			\hline
+			10 & 5 & Procesar (sin hijos) & \textbf{5} \\
+			\hline
+			11 & 6 & Procesar & \textbf{6} \\
+			\hline
+			12 & 6 & Ir a derecho (7) & - \\
+			\hline
+			13 & 7 & Procesar (sin hijos) & \textbf{7} \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\textbf{Resultado esperado del recorrido inorden:} 1, 2, 3, 4, 5, 6, 7
+	
+	\textbf{Fase 3: Práctica Individual (5 min)}
+	Aplicar el mismo algoritmo en un árbol diferente proporcionado.
+	
+	\textbf{Fase 4: Verificación Grupal (2 min)}
+	Comparar resultados y aclarar dudas.
+	
+	\newpage
+	
+	\subsection*{Ejercicio 3: Problema de Búsqueda Aplicada (15 min)}
+	
+	\activitybox{Resolución de Problema Real: El Laberinto de Escape}
+	
+	\textbf{Contexto:} Estás atrapado en un laberinto y necesitas encontrar la salida más rápida.
+	
+	\begin{center}
+		\textbf{Laberinto Original}
+	\end{center}
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+			% Laberinto como grid
+			\draw[thick] (0,0) grid (5,4);
+			
+			% Paredes (líneas más gruesas)
+			\draw[very thick, red] (1,0) -- (1,2);
+			\draw[very thick, red] (2,1) -- (4,1);
+			\draw[very thick, red] (3,2) -- (3,4);
+			\draw[very thick, red] (0,3) -- (2,3);
+			\draw[very thick, red] (4,2) -- (5,2);
+			
+			% Punto de inicio
+			\node[circle, fill=secondarygreen, minimum size=0.8cm] at (0.5,0.5) {\textbf{I}};
+			
+			% Punto de salida
+			\node[circle, fill=dangerred, minimum size=0.8cm] at (4.5,3.5) {\textbf{S}};
+			
+			% Camino óptimo sugerido
+			\draw[thick, purple, dashed, line width=2pt] 
+			(0.5,0.5) -- (0.5,1.5) -- (0.5,2.5) -- (2.5,2.5) -- (2.5,3.5) -- (4.5,3.5);
+		\end{tikzpicture}
+	\end{center}
+	
+	\textbf{Desafío del Grupo:}
+	
+	\begin{enumerate}
+		\item \textbf{Representación (5 min):} Convertir el laberinto en un grafo
+		\begin{itemize}
+			\item Cada celda libre = nodo
+			\item Conexiones entre celdas adyacentes = aristas
+		\end{itemize}
+		
+		\item \textbf{Aplicación de BFS (7 min):} Encontrar el camino más corto
+		\begin{itemize}
+			\item ¿Por qué BFS es mejor que DFS aquí?
+			\item Simular paso a paso desde el punto de inicio
+		\end{itemize}
+		
+		\item \textbf{Análisis (3 min):} Discusión grupal
+		\begin{itemize}
+			\item Ventajas de BFS para encontrar camino más corto
+			\item Casos donde DFS podría ser útil
+		\end{itemize}
+	\end{enumerate}
+	
+	\quizbox{Pregunta Reflexiva}
+	\textbf{¿Por qué BFS garantiza encontrar el camino más corto en un grafo no ponderado?}\\
+	\textit{Respuesta grupal con justificación}
+	
+	\newpage
+	
+	% BLOQUE 3: ACTIVIDAD GRUPAL ESTRUCTURADA
+	\section*{\faUsers\ Bloque 3: Construcción Colaborativa (20 min)}
+	
+	\instructorbox{warningorange}{Alejandro + Gabriel - Facilitación Conjunta}
+	
+	\subsection*{Metodología de Trabajo Grupal}
+	
+	\begin{presentationbox}{turquoise}{Formación y Roles de Grupos (4-5 personas)}
+		\textbf{Roles asignados por grupo:}
+		\begin{itemize}
+			\item \textbf{\faUserTie\ Coordinador:} Organiza tiempo y presenta
+			\item \textbf{\faPen\ Dibujante:} Crea representaciones visuales
+			\item \textbf{\faCalculator\ Analista:} Ejecuta algoritmos paso a paso
+			\item \textbf{\faComments\ Comunicador:} Explica decisiones al grupo
+			\item \textbf{\faCheck\ Verificador:} Revisa que todo esté correcto
+		\end{itemize}
+	\end{presentationbox}
+	
+	\subsection*{Escenarios de Aplicación (15 min)}
+	
+	\begin{center}
+		\textbf{Cada grupo recibe un escenario diferente}
+	\end{center}
+	
+	\begin{center}
+		\begin{tabular}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+			\hline
+			\cellcolor{primaryblue!20}\textbf{\faUsers\ Escenario 1} & 
+			\cellcolor{secondarygreen!20}\textbf{\faFolder\ Escenario 2} & 
+			\cellcolor{warningorange!20}\textbf{\faTruck\ Escenario 3} & 
+			\cellcolor{purple!20}\textbf{\faGraduationCap\ Escenario 4} \\
+			\hline
+			\textbf{Red de Amigos} & \textbf{Sistema de Carpetas} & \textbf{Rutas de Delivery} & \textbf{Árbol de Decisión} \\
+			\hline
+			¿Cómo llegar de Ana a Carlos con menos intermediarios? & Organizar y buscar archivos eficientemente & Optimizar entregas en un barrio & Elegir carrera universitaria \\
+			\hline
+			\small Aplicar BFS para camino más corto en red social & \small Usar estructura de árbol para jerarquía de carpetas & \small Problema del viajante simplificado con grafos ponderados & \small Árbol de decisión con múltiples criterios \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\subsection*{Estructura de Trabajo por Fases}
+	
+	\begin{center}
+		\begin{tikzpicture}[node distance=1.5cm]
+			% Línea de tiempo
+			\draw[thick, turquoise] (0,0) -- (15,0);
+			
+			% Puntos de tiempo
+			\foreach \x/\time in {0/0, 5/5, 12/12, 15/15} {
+				\fill[turquoise] (\x,0) circle (3pt);
+				\node[below] at (\x,-0.3) {\small\textbf{\time min}};
+			}
+			
+			% Bloques de actividades
+			\node[rectangle, draw, fill=primaryblue!20, minimum width=4cm, minimum height=1cm] at (2.5,1) {
+				\begin{minipage}{3.8cm}
+					\centering\small\textbf{Fase 1: Construcción}\\
+					Dibujar grafo/árbol\\
+					5 minutos
+				\end{minipage}
+			};
+			
+			\node[rectangle, draw, fill=secondarygreen!20, minimum width=6cm, minimum height=1cm] at (8.5,1) {
+				\begin{minipage}{5.8cm}
+					\centering\small\textbf{Fase 2: Algoritmo}\\
+					Elegir y simular DFS/BFS apropiado\\
+					7 minutos
+				\end{minipage}
+			};
+			
+			\node[rectangle, draw, fill=warningorange!20, minimum width=2.5cm, minimum height=1cm] at (13.5,1) {
+				\begin{minipage}{2.3cm}
+					\centering\small\textbf{Fase 3: Preparación}\\
+					Organizar presentación\\
+					3 minutos
+				\end{minipage}
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\subsection*{Presentaciones Rápidas (5 min)}
+	
+	\instructorbox{turquoise}{Gabriel - Moderador de Presentaciones}
+	
+	\textbf{Formato de Presentación:}
+	\begin{itemize}
+		\item \textbf{Tiempo:} 1 minuto presentación + 30 segundos preguntas
+		\item \textbf{Enfoque:} Qué algoritmo usaron y por qué fue efectivo
+		\item \textbf{Estructura sugerida:}
+		\begin{enumerate}
+			\item Problema identificado (15 seg)
+			\item Solución aplicada (30 seg)
+			\item Justificación del algoritmo (15 seg)
+		\end{enumerate}
+	\end{itemize}
+	
+	\newpage
+	
+	% BLOQUE 4: APLICACIONES Y CIERRE
+	\section*{\faRocket\ Bloque 4: Conexiones con el Mundo Real (10 min)}
+	
+	\instructorbox{turquoise}{Gabriel - Especialista en Aplicaciones}
+	
+	\subsection*{Casos Sorprendentes que Generan "Wow" (5 min)}
+	
+	\begin{presentationbox}{primaryblue}{Aplicaciones Revolucionarias}
+		\begin{multicols}{2}
+			\textbf{\faRoute\ GPS Inteligente:}
+			\begin{itemize}
+				\item No solo rutas estáticas
+				\item Tráfico en tiempo real
+				\item Predicción de congestión
+				\item Algoritmo de Dijkstra optimizado
+			\end{itemize}
+			
+			\textbf{\faShare\ Redes Sociales:}
+			\begin{itemize}
+				\item Sugerencias de amigos
+				\item Detección de comunidades
+				\item Análisis de influencia
+				\item Algoritmos de grafos complejos
+			\end{itemize}
+			
+			\columnbreak
+			
+			\textbf{\faSearch\ Motores de Búsqueda:}
+			\begin{itemize}
+				\item PageRank de Google
+				\item Cada página web = nodo
+				\item Enlaces = aristas dirigidas
+				\item Importancia por conexiones
+			\end{itemize}
+			
+			\textbf{\faRobot\ Inteligencia Artificial:}
+			\begin{itemize}
+				\item Árboles de decisión
+				\item Redes neuronales
+				\item Algoritmos genéticos
+				\item Machine learning
+			\end{itemize}
+		\end{multicols}
+	\end{presentationbox}
+	
+	\begin{center}
+		\begin{tcolorbox}[colback=secondarygreen!10, colframe=secondarygreen, rounded corners, width=0.9\textwidth]
+			\centering
+			\Large\faLightbulb\ \textbf{Momento "Aha"}\\[0.3cm]
+			\normalsize\textit{"Estos algoritmos no son solo teoría académica...\\
+				¡Los usas docenas de veces cada día sin darte cuenta!"}
+		\end{tcolorbox}
+	\end{center}
+	
+	\subsection*{Síntesis y Reflexión Participativa (5 min)}
+	
+	\instructorbox{primaryblue}{Juan Sandoval - Cierre Reflexivo}
+	
+	\begin{center}
+		\textbf{\Large Construcción Colaborativa del Aprendizaje}
+	\end{center}
+	
+	\quizbox{Pregunta Reflexiva Central}
+	\textbf{"¿Dónde más han visto estos patrones sin saberlo?"}\\
+	\textit{Participación abierta - Cada respuesta construye sobre la anterior}
+	
+	\vspace{0.5cm}
+	
+	\textbf{Mapa Conceptual Colaborativo:}
+	
+	\begin{center}
+		\begin{tikzpicture}[
+			mindmap, 
+			grow cyclic,
+			every node/.style=concept, 
+			concept color=primaryblue!40,
+			level 1/.append style={level distance=4cm,sibling angle=90},
+			level 2/.append style={level distance=2.5cm,sibling angle=45}
+			]
+			\node[concept] {\textbf{Grafos \& Árboles}}
+			child[concept color=secondarygreen!40] {
+				node[concept] {\textbf{Teoría}}
+				child { node[concept] {DFS} }
+				child { node[concept] {BFS} }
+			}
+			child[concept color=warningorange!40] {
+				node[concept] {\textbf{Práctica}}
+				child { node[concept] {Pseudocódigo} }
+				child { node[concept] {Simulación} }
+			}
+			child[concept color=turquoise!40] {
+				node[concept] {\textbf{Aplicaciones}}
+				child { node[concept] {GPS} }
+				child { node[concept] {Redes Sociales} }
+			}
+			child[concept color=purple!40] {
+				node[concept] {\textbf{Futuro}}
+				child { node[concept] {IA} }
+				child { node[concept] {Big Data} }
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\newpage
+	
+	% RECURSOS ADICIONALES
+	\section*{\faBookmark\ Recursos Adicionales para Profundizar}
+	
+	\begin{center}
+		\begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue, rounded corners]
+			\centering
+			\Large\faQrcode\ \textbf{Escanea para Recursos Digitales}\\[0.5cm]
+			\qrcode[height=3cm]{https://visualgo.net/en/dfsbfs}\\[0.3cm]
+			\normalsize\textbf{VisuAlgo.net} - Simuladores interactivos
+		\end{tcolorbox}
+	\end{center}
+	
+	\begin{multicols}{2}
+		\subsection*{\faBook\ Lecturas Recomendadas}
+		\begin{itemize}
+			\item \textbf{Principiantes:} "Grokking Algorithms" - Aditya Bhargava
+			\item \textbf{Intermedio:} "Introduction to Algorithms" - CLRS
+			\item \textbf{Aplicado:} "Algorithms to Live By" - Christian y Griffiths
+		\end{itemize}
+		
+		\subsection*{\faCode\ Práctica en Línea}
+		\begin{itemize}
+			\item \textbf{LeetCode:} Problemas de grafos
+			\item \textbf{HackerRank:} Desafíos estructurados
+			\item \textbf{CodeSignal:} Entrevistas técnicas
+		\end{itemize}
+		
+		\columnbreak
+		
+		\subsection*{\faVideo\ Videos Complementarios}
+		\begin{itemize}
+			\item \textbf{3Blue1Brown:} Visualizaciones matemáticas
+			\item \textbf{MIT OpenCourseWare:} Cursos completos
+			\item \textbf{Khan Academy:} Fundamentos paso a paso
+		\end{itemize}
+		
+		\subsection*{\faTools\ Herramientas de Visualización}
+		\begin{itemize}
+			\item \textbf{Graphviz:} Diagramas programáticos
+			\item \textbf{Gephi:} Análisis de redes
+			\item \textbf{D3.js:} Visualizaciones web
+		\end{itemize}
+	\end{multicols}
+	
+	\newpage
+	
+	% MINI-QUIZZES INTERACTIVOS DETALLADOS
+	\section*{\faQuestionCircle\ Sistema de Mini-Quizzes Interactivos}
+	
+	\subsection*{Metodología de Respuesta Rápida}
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\cellcolor{secondarygreen!20}\textbf{\faCircle\ Verde} & 
+			\cellcolor{primaryblue!20}\textbf{\faCircle\ Azul} & 
+			\cellcolor{dangerred!20}\textbf{\faCircle\ Rojo} \\
+			\hline
+			Opción A & Opción B & Opción C \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\subsection*{Banco de Preguntas Estratégicas}
+	
+	\quizbox{Quiz 1: Identificación Visual}
+	\textbf{Observa el siguiente diagrama. ¿Qué tipo de estructura es?}
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			\node[circle, draw, fill=primaryblue!20] (a) at (0,0) {A};
+			\node[circle, draw, fill=primaryblue!20] (b) at (2,1) {B};
+			\node[circle, draw, fill=primaryblue!20] (c) at (2,-1) {C};
+			\node[circle, draw, fill=primaryblue!20] (d) at (4,0) {D};
+			
+			\draw[thick] (a) -- (b);
+			\draw[thick] (a) -- (c);
+			\draw[thick] (b) -- (d);
+			\draw[thick] (c) -- (d);
+			\draw[thick] (b) -- (c);
+		\end{tikzpicture}
+	\end{center}
+	
+	\textcolor{secondarygreen}{\faCircle} Verde: Árbol \quad
+	\textcolor{primaryblue}{\faCircle} Azul: Grafo \quad
+	\textcolor{dangerred}{\faCircle} Rojo: Lista
+	
+	\vspace{0.5cm}
+	
+	\quizbox{Quiz 2: Conceptual}
+	\textbf{¿Cuál es la principal ventaja de BFS sobre DFS para encontrar el camino más corto?}
+	
+	\textcolor{secondarygreen}{\faCircle} Verde: Explora por niveles\\
+	\textcolor{primaryblue}{\faCircle} Azul: Es más rápido\\
+	\textcolor{dangerred}{\faCircle} Rojo: Usa menos memoria
+	
+	\vspace{0.5cm}
+	
+	\quizbox{Quiz 3: Práctica}
+	\textbf{En un recorrido inorden del árbol mostrado, después de visitar el nodo 1 y 2, ¿cuál es el siguiente?}
+	
+	\begin{center}
+		\begin{tikzpicture}[
+			level distance=1.5cm,
+			level 1/.style={sibling distance=2cm},
+			every node/.style={circle, draw, thick, minimum size=0.8cm}
+			]
+			\node[fill=primaryblue!20] {4}
+			child {node[fill=secondarygreen!20] {2}
+				child {node[fill=warningorange!20] {1}}
+				child {node[fill=warningorange!20] {3}}
+			}
+			child {node[fill=secondarygreen!20] {5}};
+		\end{tikzpicture}
+	\end{center}
+	
+	\textcolor{secondarygreen}{\faCircle} Verde: 3 \quad
+	\textcolor{primaryblue}{\faCircle} Azul: 4 \quad
+	\textcolor{dangerred}{\faCircle} Rojo: 5
+	
+	\vspace{0.5cm}
+	
+	\quizbox{Quiz 4: Aplicación}
+	\textbf{¿Qué algoritmo de grafos utiliza principalmente Google Maps para calcular rutas?}
+	
+	\textcolor{secondarygreen}{\faCircle} Verde: Dijkstra\\
+	\textcolor{primaryblue}{\faCircle} Azul: BFS\\
+	\textcolor{dangerred}{\faCircle} Rojo: DFS
+	
+	\newpage
+	
+	% MÉTRICAS DE ÉXITO Y EVALUACIÓN
+	\section*{\faChartLine\ Sistema de Evaluación y Métricas}
+	
+	\subsection*{Indicadores de Participación}
+	
+	\begin{center}
+		\begin{tabular}{|l|c|c|}
+			\hline
+			\textbf{Métrica} & \textbf{Objetivo} & \textbf{Medición} \\
+			\hline
+			Participación en quiz & 80\% & Tarjetas levantadas \\
+			\hline
+			Grupos que completan ejercicios & 100\% & Observación directa \\
+			\hline
+			Preguntas espontáneas & $\geq$ 5 & Conteo durante sesión \\
+			\hline
+			Atención visual sostenida & 90\% & Observación de engagement \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\subsection*{Rúbrica de Comprensión}
+	
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|}
+			\hline
+			\textbf{Criterio} & \textbf{Básico} & \textbf{Intermedio} & \textbf{Avanzado} \\
+			\hline
+			Identificación & Reconoce grafo & Distingue tipos & Justifica elección \\
+			de estructuras & vs árbol & básicos & de estructura \\
+			\hline
+			Aplicación de & Sigue pasos & Ejecuta con & Optimiza según \\
+			algoritmos & guiados & autonomía & contexto \\
+			\hline
+			Conexión con & Identifica 1-2 & Explica 3-4 & Propone nuevas \\
+			aplicaciones & casos obvios & aplicaciones & aplicaciones \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\newpage
+	
+	% PLANES DE CONTINGENCIA
+	\section*{\faExclamationTriangle\ Planes de Contingencia}
+	
+	\subsection*{Gestión de Tiempo}
+	
+	\begin{presentationbox}{warningorange}{Si van Adelantados (+10 minutos)}
+		\textbf{Actividades de Extensión:}
+		\begin{itemize}
+			\item \textbf{Ejercicio Bonus:} Implementar BFS en pseudocódigo paso a paso
+			\item \textbf{Discusión Avanzada:} Análisis de complejidad temporal O(V+E)
+			\item \textbf{Casos Adicionales:} Más aplicaciones del mundo real
+			\item \textbf{Mini-competencia:} Resolución rápida de problemas
+		\end{itemize}
+	\end{presentationbox}
+	
+	\begin{presentationbox}{dangerred}{Si van Atrasados (-10 minutos)}
+		\textbf{Estrategias de Aceleración:}
+		\begin{itemize}
+			\item \textbf{Fusión de Ejercicios:} Combinar ejercicios 2 y 3 en uno
+			\item \textbf{Presentaciones Express:} 30 segundos por grupo
+			\item \textbf{Quiz Oral:} Preguntas rápidas sin tarjetas
+			\item \textbf{Demostración Dirigida:} Menos práctica individual
+		\end{itemize}
+	\end{presentationbox}
+	
+	\subsection*{Contingencias Técnicas}
+	
+	\begin{presentationbox}{darkgray}{Fallas Tecnológicas}
+		\textbf{Modo Analógico Completo:}
+		\begin{itemize}
+			\item \textbf{Pizarra Principal:} Dibujos en tiempo real
+			\item \textbf{Participación Directa:} Más interacción cara a cara
+			\item \textbf{Materiales Físicos:} Poster pre-dibujados como backup
+			\item \textbf{Storytelling Aumentado:} Más narrativa, menos visuales digitales
+		\end{itemize}
+	\end{presentationbox}
+	
+	\newpage
+	
+	% CIERRE MOTIVACIONAL
+	\section*{\faHeart\ Reflexión Final: El Impacto de lo Aprendido}
+	
+	\begin{center}
+		\begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue, rounded corners, width=0.9\textwidth]
+			\centering
+			\Large\textbf{Mensaje de Cierre}\\[0.5cm]
+			\normalsize\textit{"Hoy no solo aprendieron sobre grafos y árboles...\\
+				Desarrollaron una nueva forma de ver y resolver problemas.\\[0.3cm]
+				Cada vez que uses Google Maps, veas recomendaciones de Netflix,\\
+				o navegues por redes sociales, recordarás que detrás de esa\\
+				'magia' hay algoritmos elegantes que ahora comprendes."}\\[0.5cm]
+			\textbf{¡El mundo de los algoritmos te está esperando!}
+		\end{tcolorbox}
+	\end{center}
+	
+	\vfill
+	
+	\begin{center}
+		\begin{tcolorbox}[colback=secondarygreen!10, colframe=secondarygreen, rounded corners]
+			\centering
+			\Large\faThumbsUp\ \textbf{¡Gracias por su Participación Activa!}\\[0.5cm]
+			\textbf{Equipo de Instructores:}\\[0.3cm]
+			\begin{tabular}{cc}
+				\textbf{Juan Sandoval} & \textbf{Javier} \\
+				\textbf{Alejandro} & \textbf{Gabriel}
+			\end{tabular}\\[0.5cm]
+			\textit{Continuemos construyendo el futuro con algoritmos inteligentes}
+		\end{tcolorbox}
+	\end{center}
+\end{document}
