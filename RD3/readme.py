@@ -1,1 +1,0 @@
-print("Gabo Gay")
